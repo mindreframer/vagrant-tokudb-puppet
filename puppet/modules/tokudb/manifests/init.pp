@@ -1,8 +1,8 @@
 ## http://www.onaxer.com/2011/03/08/install-mysql-5-5-on-ubuntu/
 class tokudb{
   class{"tokudb::params": }
-    -> class{"tokudb::download":}
     -> class{"tokudb::users":}
+    -> class{"tokudb::download":}
     -> class{"tokudb::packages":}
     -> class{"tokudb::configs":}
     -> class{"tokudb::initialize":}
