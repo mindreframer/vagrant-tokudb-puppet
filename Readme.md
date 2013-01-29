@@ -2,7 +2,7 @@
 
       - Vagrant (http://www.vagrantup.com/)
 
-# Usage:
+### Usage:
 
     $ git clone git://github.com/mindreframer/vagrant-tokudb-puppet.git
     $ cd vagrant-tokudb-puppet
@@ -14,11 +14,11 @@
     $ vagrant ssh
 
 
-# runpuppet (run  puppet), run under `vagrant`-user:
+#### runpuppet (run  puppet), run under `vagrant`-user:
     $ runpuppet
 
 
-# download Tokudb (you'll need to register)
+#### download Tokudb (you'll need to register)
 
     http://www.tokutek.com/resources/support/gadownloads/
 
