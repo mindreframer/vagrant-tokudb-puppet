@@ -9,6 +9,17 @@ class tokudb{
     -> class{"tokudb::service":}
 }
 
+class tokudb::users{
+  user { 'mysql':
+    ensure => 'present'
+  }
+
+  group { "mysql":
+    ensure  => "present",
+    require => User['mysql']
+  }
+}
+
 class tokudb::download{
   $filepath = $tokudb::params::download_file
   $fullpath = $tokudb::params::fullpath
@@ -29,8 +40,7 @@ class tokudb::download{
 }
 
 class tokudb::packages{
-  package{"libaio1": ensure => installed}
-  package{"mysql-client-core-5.5": ensure => installed}
+  package{$tokudb::params::packagenames: ensure => installed}
 }
 
 class tokudb::configs{
@@ -47,10 +57,6 @@ class tokudb::configs{
   }
 }
 
-class tokudb::service{
-
-}
-
 class tokudb::initialize{
   exec{"init mysql":
     command => "echo 1 && cd /usr/local/mysql && scripts/mysql_install_db --user=mysql && touch /usr/local/mysql/.installed",
@@ -58,13 +64,9 @@ class tokudb::initialize{
   }
 }
 
-class tokudb::users{
-  user { 'mysql':
-    ensure => 'present'
-  }
-
-  group { "mysql":
-    ensure  => "present",
-    require => User['mysql']
+class tokudb::service{
+  service{"mysql":
+    ensure    => running,
+    subscribe => Class["tokudb::configs"]
   }
 }
