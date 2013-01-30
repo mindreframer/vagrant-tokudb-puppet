@@ -22,6 +22,12 @@ timezone          : the timezone id (see file timeZone.txt) varchar(40)
 modification date
 
 
+/*
+cp /vagrant/data/UA/UA.txt /tmp
+cp /vagrant/data/RU/RU.txt /tmp
+sudo chown mysql:mysql /tmp/*.txt
+*/
+
 
 
 CREATE DATABASE test_db CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -59,11 +65,6 @@ CREATE TABLE geonames_inno (
    admin2_code varchar(20)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB;
 
-/*
-cp /vagrant/data/UA/UA.txt /tmp
-cp /vagrant/data/RU/RU.txt /tmp
-sudo chown mysql:mysql /tmp/*.txt
-*/
 
 LOAD DATA INFILE '/tmp/RU.txt' INTO
 TABLE geonames_inno (geonameid,name, asciiname, alternatenames, latitude, longitude, feature_class,
