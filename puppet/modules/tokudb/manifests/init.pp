@@ -32,14 +32,14 @@ class tokudb::download{
   }
   -> exec{"decompress tokudb":
     command => "echo 1 && cd /usr/local && tar xvfz /vagrant/$filepath",
-    unless  => "test -e /usr/local/mysql"
+    unless  => "test -e $tokudb::params::base_dir"
   }
-  -> file{"/usr/local/mysql":
+  -> file{$tokudb::params::base_dir:
     ensure  => link,
     target  => "/usr/local/$fullpath",
   }
   -> exec{"adjust filerights tokudb":
-    command => "chown -R mysql:mysql /usr/local/mysql/"
+    command => "chown -R mysql:mysql $tokudb::params::base_dir"
   }
 }
 
@@ -59,16 +59,17 @@ class tokudb::configs{
   -> file{"/etc/mysql/my.cnf":
     content => template("tokudb/my.cnf.erb"),
   }
-  -> file{"/var/lib/mysql":
+  -> file{$tokudb::params::data_dir:
     ensure => directory,
     owner => 'mysql', group => 'mysql'
   }
 }
 
 class tokudb::initialize{
+  $check_file = "$tokudb::params::base_dir/.installed"
   exec{"init mysql":
-    command => "echo 1 && cd /usr/local/mysql && scripts/mysql_install_db --user=mysql && touch /usr/local/mysql/.installed",
-    unless  => "test -e /usr/local/mysql/.installed"
+    command => "echo 1 && cd $tokudb::params::base_dir && scripts/mysql_install_db --user=mysql && touch $check_file",
+    unless  => "test -e $check_file"
   }
 }
 

@@ -6,4 +6,6 @@ class tokudb::params{
   $download_url  = "http://master.dl.sourceforge.net/project/tokudbdownload/mysql-5.5.28-tokudb-6.6.4-52174-linux-x86_64.tar.gz"
   # also group_id, for consistency
   $user_id       = 927
+  $base_dir      = '/usr/local/mysql'
+  $data_dir      = '/var/lib/mysql'
 }
