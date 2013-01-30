@@ -1,4 +1,3 @@
-## http://www.onaxer.com/2011/03/08/install-mysql-5-5-on-ubuntu/
 class tokudb{
   class{"tokudb::params": }
     -> class{"tokudb::users":}
@@ -23,19 +22,24 @@ class tokudb::users{
 class tokudb::download{
   $filepath = $tokudb::params::download_file
   $fullpath = $tokudb::params::fullpath
-  exec{"decompress mysql":
+
+  file{"/vagrant":
+    ensure => directory
+  }
+  -> exec{"download tokudb":
+    command => "curl $tokudb::params::download_url > /vagrant/$filepath",
+    unless  =>  "test -e /vagrant/$filepath"
+  }
+  -> exec{"decompress tokudb":
     command => "echo 1 && cd /usr/local && tar xvfz /vagrant/$filepath",
     unless  => "test -e /usr/local/mysql"
   }
-
-  file{"/usr/local/mysql":
+  -> file{"/usr/local/mysql":
     ensure  => link,
     target  => "/usr/local/$fullpath",
-    require => Exec['decompress mysql']
   }
-
-  exec{"chown -R mysql:mysql /usr/local/mysql/":
-    require => File['/usr/local/mysql']
+  -> exec{"adjust filerights tokudb":
+    command => "chown -R mysql:mysql /usr/local/mysql/"
   }
 }
 
