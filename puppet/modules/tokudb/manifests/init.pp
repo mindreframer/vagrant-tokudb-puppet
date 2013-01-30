@@ -23,8 +23,8 @@ class tokudb::download{
   $filepath = $tokudb::params::download_file
   $fullpath = $tokudb::params::fullpath
 
-  file{"/vagrant":
-    ensure => directory
+  exec{"mkdir -p /vagrant":
+    unless => "test -e /vagrant"
   }
   -> exec{"download tokudb":
     command => "curl $tokudb::params::download_url > /vagrant/$filepath",
