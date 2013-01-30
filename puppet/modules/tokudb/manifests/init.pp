@@ -31,7 +31,8 @@ class tokudb::download{
     unless  =>  "test -e /vagrant/$filepath"
   }
   -> exec{"decompress tokudb":
-    command => "echo 1 && cd /usr/local && tar xvfz /vagrant/$filepath",
+    command => "tar xvfz /vagrant/$filepath",
+    cwd     => "/usr/local",
     unless  => "test -e $tokudb::params::base_dir"
   }
   -> file{$tokudb::params::base_dir:
@@ -68,7 +69,8 @@ class tokudb::configs{
 class tokudb::initialize{
   $check_file = "$tokudb::params::base_dir/.installed"
   exec{"init mysql":
-    command => "echo 1 && cd $tokudb::params::base_dir && scripts/mysql_install_db --user=mysql && touch $check_file",
+    command => "scripts/mysql_install_db --user=mysql && touch $check_file",
+    cwd     => $tokudb::params::base_dir,
     unless  => "test -e $check_file"
   }
 }
