@@ -38,9 +38,11 @@ class tokudb::download{
   -> file{$tokudb::params::base_dir:
     ensure  => link,
     target  => "/usr/local/$fullpath",
+    owner   => 'mysql', group   => 'mysql'
   }
   -> exec{"adjust filerights tokudb":
-    command => "chown -R mysql:mysql $tokudb::params::base_dir"
+    command => "chown -R mysql:mysql $tokudb::params::base_dir",
+    unless  => "stat $tokudb::params::base_dir|grep Access|grep mysql"
   }
 }
 
