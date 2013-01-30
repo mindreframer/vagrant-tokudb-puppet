@@ -59,6 +59,10 @@ class tokudb::configs{
   -> file{"/etc/mysql/my.cnf":
     content => template("tokudb/my.cnf.erb"),
   }
+  -> file{"/var/lib/mysql":
+    ensure => directory,
+    owner => 'mysql', group => 'mysql'
+  }
 }
 
 class tokudb::initialize{
