@@ -69,8 +69,7 @@ class tokudb::configs{
 class tokudb::initialize{
   $check_file = "$tokudb::params::base_dir/.installed"
   exec{"init mysql":
-    command => "scripts/mysql_install_db --user=mysql && touch $check_file",
-    cwd     => $tokudb::params::base_dir,
+    command => "echo 1 && cd $tokudb::params::base_dir && ./scripts/mysql_install_db --user=mysql && touch $check_file",
     unless  => "test -e $check_file"
   }
 }
