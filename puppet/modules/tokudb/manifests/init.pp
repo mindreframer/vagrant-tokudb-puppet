@@ -10,12 +10,12 @@ class tokudb{
 
 class tokudb::users{
   user { 'mysql':
-    ensure => 'present'
+    ensure => 'present',
+    uid    => $tokudb::params::user_id,
   }
-
-  group { "mysql":
+  -> group { "mysql":
     ensure  => "present",
-    require => User['mysql']
+    gid     => $tokudb::params::user_id,
   }
 }
 
