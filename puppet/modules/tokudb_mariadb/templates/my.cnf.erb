@@ -37,8 +37,8 @@ read_rnd_buffer_size = 512K
 myisam_sort_buffer_size = 8M
 
 
-datadir = <%= scope.lookupvar("tokudb::params::data_dir") %>
-basedir = <%= scope.lookupvar("tokudb::params::base_dir") %>
+datadir = <%= scope.lookupvar("tokudb_mariadb::params::data_dir") %>
+basedir = <%= scope.lookupvar("tokudb_mariadb::params::base_dir") %>
 
 # Don't listen on a TCP/IP port at all. This can be a security enhancement,
 # if all processes that need to connect to mysqld run on the same host.
