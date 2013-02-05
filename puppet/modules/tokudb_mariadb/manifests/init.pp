@@ -1,7 +1,5 @@
-
-
 class tokudb_mariadb{
-  class{"tokudb::params": }
+  class{"tokudb_mariadb::params": }
     -> class{"tokudb_mariadb::users":}
     -> class{"tokudb_mariadb::download":}
     -> class{"tokudb_mariadb::packages":}
