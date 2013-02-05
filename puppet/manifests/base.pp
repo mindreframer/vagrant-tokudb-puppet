@@ -48,4 +48,4 @@ class {'update_aptget':
   stage => first,
 }
 
-class{"tokudb": }
+class{"tokudb_mariadb": }
