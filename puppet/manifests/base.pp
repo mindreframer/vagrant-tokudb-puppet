@@ -28,6 +28,9 @@ Stage['first'] -> Stage['main'] -> Stage['last']
 # just some packages
 package{"tmux": ensure => installed}
 package{"curl": ensure => installed}
+package{"build-essential": ensure => installed}
+package{"libtool": ensure => installed}
+package{"automake": ensure => installed}
 
 # a helper script to run puppet
 file{"/usr/local/bin/runpuppet":
