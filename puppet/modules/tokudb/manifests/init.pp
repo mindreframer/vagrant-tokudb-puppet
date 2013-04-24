@@ -23,15 +23,15 @@ class tokudb::download{
   $filepath = $tokudb::params::download_file
   $fullpath = $tokudb::params::fullpath
 
-  exec{"mkdir -p /vagrant":
-    unless => "test -e /vagrant"
+  exec{"mkdir -p /vagrant/binaries":
+    unless => "test -e /vagrant/binaries"
   }
   -> exec{"download tokudb":
-    command => "curl $tokudb::params::download_url > /vagrant/$filepath",
-    unless  =>  "test -e /vagrant/$filepath"
+    command => "curl $tokudb::params::download_url > /vagrant/binaries/$filepath",
+    unless  =>  "test -e /vagrant/binaries/$filepath"
   }
   -> exec{"decompress tokudb":
-    command => "tar xvfz /vagrant/$filepath",
+    command => "tar xvfz /vagrant/binaries/$filepath",
     cwd     => "/usr/local",
     unless  => "test -e $tokudb::params::base_dir"
   }
