@@ -23,15 +23,15 @@ class tokudb_mariadb::download{
   $filepath = $tokudb_mariadb::params::download_file
   $fullpath = $tokudb_mariadb::params::fullpath
 
-  exec{"mkdir -p /vagrant":
-    unless => "test -e /vagrant"
+  exec{"mkdir -p /vagrant/binaries":
+    unless => "test -e /vagrant/binaries"
   }
   -> exec{"download tokudb_mariadb":
-    command => "curl $tokudb_mariadb::params::download_url > /vagrant/$filepath",
-    unless  =>  "test -e /vagrant/$filepath"
+    command => "curl $tokudb_mariadb::params::download_url > /vagrant/binaries/$filepath",
+    unless  =>  "test -e /vagrant/binaries/$filepath"
   }
   -> exec{"decompress tokudb_mariadb":
-    command => "tar xvfz /vagrant/$filepath",
+    command => "tar xvfz /vagrant/binaries/$filepath",
     cwd     => "/usr/local",
     unless  => "test -e $tokudb_mariadb::params::base_dir"
   }

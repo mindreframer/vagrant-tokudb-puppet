@@ -1,5 +1,6 @@
 class tokudb_mariadb::params{
-  $fullpath      = "mariadb-5.5.28a-tokudb-6.6.4-52174-linux-x86_64"
+  #$fullpath      = "mariadb-5.5.28a-tokudb-6.6.4-52174-linux-x86_64"
+  $fullpath      = "mariadb-5.5.30-tokudb-7.0.1-linux-x86_64"
   $download_file = "$fullpath.tar.gz"
   $packagenames  = ["libaio1", "mysql-client-core-5.5"] # ubuntu 12.04
   # a tmp location
