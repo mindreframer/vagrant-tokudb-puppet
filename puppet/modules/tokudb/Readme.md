@@ -1,7 +1,7 @@
-## Puppet module for Tokudb 6.6
+## Puppet module for Tokudb 7.0.1
 
 #### the download file used:
-- mysql-5.5.28-tokudb-6.6.4-52174-linux-x86_64
+- mysql-5.5.30-tokudb-7.0.1-linux-x86_64
 
 
 #### for more info:

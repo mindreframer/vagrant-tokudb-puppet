@@ -1,3 +1,7 @@
+# TokuDB v. 7 is Open Source!
+
+
+
 # Requirements:
 
       - Vagrant (http://www.vagrantup.com/)
@@ -22,4 +26,4 @@
 
     http://www.tokutek.com/resources/support/gadownloads/
 
-  The Puppet module  works with `mysql-5.5.28-tokudb-6.6.4-52174-linux-x86_64`.
+  The Puppet module  works with `mariadb-5.5.30-tokudb-7.0.1-linux-x86_64` and `mysql-5.5.30-tokudb-7.0.1-linux-x86_64`.
